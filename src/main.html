@@ -25,35 +25,24 @@
 			<li class="domain">
 				<h2 class="name">{{name}}</h2>
 				<ul class="focuses"></ul>
+				<div class="addFocus">+ Click to add a focus</div>
 			</li>
-		</script>
-
-		<script class="formPageAddFocus template" type="text/x-template">
-			<div class="addFocus">+ Click to add a focus</div>
 		</script>
 
 		<script class="formPageFocus template" type="text/x-template">
 			<li class="focus">
-				<div class="timestamp">{{timestamp}}</div>
-				<div class="container">
-					<div class="description">{{description}}</div>
-					<div class="solution">{{solution}}</div>
-					<div class="initials">{{initials}}</div>
-				</div>
+				<div class="mostRecentRevision"></div>
+				<div class="pastRevisions"></div>
 			</li>
 		</script>
 
-		<script class="formPageFocusEdit template" type="text/x-template">
-			<li class="focus">
-				<div class="timestamp">{{timestamp}}</div>
-				<div class="container">
-					<textarea class="description" placeholder="Focus area">{{description}}</textarea>
-					<textarea class="solution" placeholder="Progress notes">{{solution}}</textarea>
-					<textarea class="initials" placeholder="Initials">{{initials}}</textarea>
-				</div>
-				<button type="button" class="save">Save</button>
-				<button type="button" class="delete">Delete</button>
-			</li>
+		<script class="formPageFocusRev template" type="text/x-template">
+			<div class="timestamp">{{timestamp}}</div>
+			<div class="container">
+				<textarea class="description" placeholder="Focus area">{{description}}</textarea>
+				<textarea class="solution" placeholder="Progress notes">{{solution}}</textarea>
+				<textarea class="initials" placeholder="Initials">{{initials}}</textarea>
+			</div>
 		</script>
 
 		<script src="lib/handlebars-v1.1.2.js"></script>

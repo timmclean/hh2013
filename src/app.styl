@@ -1,0 +1,65 @@
+.page
+	font-family sans-serif
+	font-weight 300
+
+	> h1
+		padding 18px
+		font-size 30px
+
+	> .patientName, > .jNumber
+		display inline-block
+
+		padding 12px 18px
+
+	> .domains
+		padding 12px 18px
+
+		> .domain
+			padding 12px 0
+
+			color black
+
+			> .name
+				color hsl(220, 10%, 60%)
+				font-weight 700
+				text-transform uppercase
+
+			> .empty
+				display block
+
+				margin 12px 8px
+
+				border 3px dashed hsl(220, 10%, 80%)
+
+				padding 0 42px
+
+				color hsl(220, 10%, 70%)
+				cursor pointer
+				font-weight 700
+				line-height 100px
+
+			> .focuses
+				> .focus
+					padding 12px 6px
+
+					> .timestamp
+						display block
+
+						padding 6px 0
+
+						color hsl(220, 10%, 60%)
+
+					> .container
+						display flex
+
+						> .description
+							display block
+							width 30%
+
+						> .solution
+							display block
+							width 60%
+
+						> .initials
+							display block
+							width 10%

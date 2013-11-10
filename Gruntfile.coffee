@@ -12,6 +12,17 @@ module.exports = (grunt) ->
 				}]
 			}
 		}
+		stylus: {
+			all: {
+				files: [{
+					expand: true
+					cwd: 'src'
+					src: '**/*.styl'
+					dest: 'compiled'
+					ext: '.css'
+				}]
+			}
+		}
 		copy: {
 			all: {
 				files: [
@@ -23,25 +34,35 @@ module.exports = (grunt) ->
 					{
 						expand: true
 						cwd: 'src'
-						src: '**/*.html'
+						src: ['**/*.html', '**/*.js', '**/*.css']
 						dest: 'compiled'
 					}
 				]
 			}
 		}
 		clean: ['compiled']
+		watch: {
+			all: {
+				files: ['src/**']
+				tasks: ['clean', 'build']
+			}
+		}
 	}
 
 	grunt.loadNpmTasks 'grunt-contrib-clean'
 	grunt.loadNpmTasks 'grunt-contrib-coffee'
 	grunt.loadNpmTasks 'grunt-contrib-copy'
+	grunt.loadNpmTasks 'grunt-contrib-stylus'
+	grunt.loadNpmTasks 'grunt-contrib-watch'
 
 	grunt.registerTask 'default', [
 		'clean'
 		'build'
+		'watch'
 	]
 
 	grunt.registerTask 'build', [
 		'copy'
 		'coffee'
+		'stylus'
 	]

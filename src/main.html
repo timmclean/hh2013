@@ -2,12 +2,47 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Test App</title>
+
+		<title>Care Plan</title>
+
+		<link rel="stylesheet" href="lib/reset.css">
+		<link rel="stylesheet" href="app.css">
 	</head>
 	<body>
-		<h1>My test app</h1>
+		<div class="page"></div>
 
-		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script class="formPage template" type="text/x-template">
+			<h1>Care plan</h1>
+			<span class="patientName">{{patient.name}}</span>
+			<span class="jNumber">{{patient.jNumber}}</span>
+
+			<ul class="domains"></ul>
+		</script>
+
+		<script class="formPageDomain template" type="text/x-template">
+			<li class="domain">
+				<h2 class="name">{{name}}</h2>
+				<ul class="focuses"></ul>
+			</li>
+		</script>
+
+		<script class="formPageNoFocus template" type="text/x-template">
+			<div class="empty">+ Click to add a focus</div>
+		</script>
+
+		<script class="formPageFocus template" type="text/x-template">
+			<li class="focus">
+				<div class="timestamp">{{timestamp}}</div>
+				<div class="container">
+					<div class="description">{{description}}</div>
+					<div class="solution">{{solution}}</div>
+					<div class="initials">{{initials}}</div>
+				</div>
+			</li>
+		</script>
+
+		<script src="lib/handlebars-v1.1.2.js"></script>
+		<script src="lib/jquery-1.10.2.js"></script>
 		<script src="app.js"></script>
 	</body>
 </html>

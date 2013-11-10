@@ -2,11 +2,13 @@
   "name": "testapp",
   "main": "main.html",
   "window": {
-  	"toolbar": false
+    "toolbar": false
   },
   "devDependencies": {
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-coffee": "~0.7.0"
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-stylus": "~0.10.0"
   }
 }

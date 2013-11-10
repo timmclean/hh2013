@@ -1,11 +1,12 @@
 .page
+	background #f2f2f2
 	font-family sans-serif
 	font-weight 300
 
 	> h1
 		padding 12px 18px
 
-		color hsl(220, 10%, 60%)
+		color #919191
 		font-size 24px
 
 	> .container
@@ -23,45 +24,53 @@
 			text-align right
 
 	> .domains
-		padding 0 18px
-
 		> .domain
-			padding 12px 0
+			padding 12px 0 0 0
 
 			color black
 
 			> .name
-				color hsl(220, 10%, 60%)
+				padding 12px 18px
+
+				background #bbb
+				color black
 				font-weight 700
 				text-transform uppercase
 
 			> .addFocus
 				display block
 
-				margin 12px 8px
+				margin 12px 18px
 
-				border 3px dashed hsl(220, 10%, 80%)
+				border 1px dashed #919191
 
 				padding 0 42px
 
-				color hsl(220, 10%, 70%)
+				color #919191
 				cursor pointer
 				font-weight 700
 				line-height 48px
 
 			> .focuses
 				> .focus
-					padding 12px 6px
-
-					textarea
-						margin 0 1px
-
-						border 3px solid hsl(220, 10%, 80%)
-						outline none
+					margin 0 18px
+					padding 12px 0 0 0
 
 					> .mostRecentRevision, > .pastRevisions
 						> .container
 							display flex
+
+							textarea
+								height 80px
+
+								padding 12px
+
+								border 1px solid #919191
+								border-left-style none
+								outline none
+
+								&:first-child
+									border-left-style solid
 
 							> .description
 								display block

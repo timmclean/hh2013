@@ -116,6 +116,34 @@ showFormPage = (filePath) ->
 		}
 		domains: ({name, focuses: []} for name in DEFAULT_DOMAIN_NAMES)
 	}
+	carePlan.domains[0].focuses = [
+		{
+			revisions: [
+				timestamp: ''
+				description: 'Major Depressive Disorder\nLikely OCD\nSocial Anxiety'
+				solution: 'Health teaching re: depression and coping strategies for depression and anxiety given and printed material provided.\nExposure is the best treatment and avoidance makes things worse'
+				initials: ''
+			]
+		}
+		{
+			revisions: [
+				timestamp: ''
+				description: 'Suicidal ideation with plan'
+				solution: 'Review "Dealing with Distress booklet" to identify alternative strategies to cope with chronic suicidal thoughts.\nComposed a Safety Plan, agrees to review regularly and utilize steps outlined should you fall into crisis.  Suicidal intention and planning has completely resolved at the time of discharge'
+				initials: ''
+			]
+		}
+	]
+	carePlan.domains[2].focuses = [
+		{
+			revisions: [
+				timestamp: ''
+				description: 'Current medication'
+				solution: 'clomipramine 100 mg at bedtime\nLoxapine 10 mg at bedtime.\nativan 2 mg at bedtime (recommend minimize use; taper and discontinue)'
+				initials: ''
+			]
+		}
+	]
 
 	deserializeCarePlan carePlan, $('.page')
 

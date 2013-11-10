@@ -111,8 +111,8 @@ deserializeFocusRevision = (focusRev, parentDom) ->
 showFormPage = (filePath) ->
 	carePlan = {
 		patient: {
-			name: "John Smith"
-			jNumber: "123"
+			name: "Amy Pond"
+			jNumber: "J 10998123"
 		}
 		domains: ({name, focuses: []} for name in DEFAULT_DOMAIN_NAMES)
 	}

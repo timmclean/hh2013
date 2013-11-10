@@ -13,8 +13,10 @@
 
 		<script class="formPage template" type="text/x-template">
 			<h1>Care plan</h1>
-			<span class="patientName">{{patient.name}}</span>
-			<span class="jNumber">{{patient.jNumber}}</span>
+			<div class="container">
+				<div class="patientName">{{patient.name}}</div>
+				<div class="jNumber">{{patient.jNumber}}</div>
+			</div>
 
 			<ul class="domains"></ul>
 		</script>
@@ -26,8 +28,8 @@
 			</li>
 		</script>
 
-		<script class="formPageNoFocus template" type="text/x-template">
-			<div class="empty">+ Click to add a focus</div>
+		<script class="formPageAddFocus template" type="text/x-template">
+			<div class="addFocus">+ Click to add a focus</div>
 		</script>
 
 		<script class="formPageFocus template" type="text/x-template">
@@ -38,6 +40,19 @@
 					<div class="solution">{{solution}}</div>
 					<div class="initials">{{initials}}</div>
 				</div>
+			</li>
+		</script>
+
+		<script class="formPageFocusEdit template" type="text/x-template">
+			<li class="focus">
+				<div class="timestamp">{{timestamp}}</div>
+				<div class="container">
+					<textarea class="description">{{description}}</textarea>
+					<textarea class="solution">{{solution}}</textarea>
+					<textarea class="initials">{{initials}}</textarea>
+				</div>
+				<button type="button" class="save">Save</button>
+				<button type="button" class="delete">Delete</button>
 			</li>
 		</script>
 

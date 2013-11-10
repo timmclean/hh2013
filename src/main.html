@@ -9,23 +9,34 @@
 		<link rel="stylesheet" href="app.css">
 	</head>
 	<body>
-		<div class="page"></div>
+		<script class="newPatientPage template" type="text/x-template">
+			<div class="newPatient page">
+				<h1>New patient file</h1>
+				<input class="firstName field" placeholder="First name">
+				<input class="lastName field" placeholder="Last name">
+				<input class="jNumber field" placeholder="J number">
+				<button type="button" class="create">Create patient file</button>
+				<input type="file" class="dialog" nwsaveas>
+			</div>
+		</script>
 
 		<script class="formPage template" type="text/x-template">
-			<h1>Care plan</h1>
-			<div class="container">
-				<div class="patientName">{{patient.name}}</div>
-				<div class="jNumber">{{patient.jNumber}}</div>
-			</div>
+			<div class="form page">
+				<h1>Care plan</h1>
+				<div class="container">
+					<div class="patientName">{{patient.lastName}}, {{patient.firstName}}</div>
+					<div class="jNumber">{{patient.jNumber}}</div>
+				</div>
 
-			<ul class="domains"></ul>
+				<ul class="domains"></ul>
+			</div>
 		</script>
 
 		<script class="formPageDomain template" type="text/x-template">
 			<li class="domain">
 				<h2 class="name">{{name}}</h2>
 				<ul class="focuses"></ul>
-				<div class="addFocus">+ Click to add a focus</div>
+				<a href="#" class="addFocus">+ Click to add a focus</a>
 			</li>
 		</script>
 
@@ -48,6 +59,7 @@
 
 		<script src="lib/handlebars-v1.1.2.js"></script>
 		<script src="lib/jquery-1.10.2.js"></script>
+		<script src="lib/nprogress-0.1.2.js"></script>
 		<script src="app.js"></script>
 	</body>
 </html>

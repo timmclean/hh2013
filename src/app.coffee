@@ -1,8 +1,11 @@
+fs = require 'fs'
+
 TEMPLATE_NAMES = [
 	'formPage',
 	'formPageDomain',
 	'formPageFocus',
 	'formPageFocusRev',
+	'newPatientPage',
 ]
 
 DEFAULT_DOMAIN_NAMES = [
@@ -46,9 +49,13 @@ editFocus = (focusDom) ->
 	focusDom.remove()
 
 	newFocusDom.find('button.save').click (event) ->
+		event.preventDefault()
+
 		saveFocus $(event.target).parents('.focus')
 
 	newFocusDom.find('button.delete').click (event) ->
+		event.preventDefault()
+
 		$(event.target).parents('.focus').remove()
 
 saveFocus = (focusDom) ->
@@ -59,6 +66,8 @@ saveFocus = (focusDom) ->
 	focusDom.remove()
 
 	newFocusDom.click (event) ->
+		event.preventDefault()
+
 		editFocus $(this)
 
 serializeCarePlan = (carePlanDom) ->
@@ -89,6 +98,8 @@ deserializeDomain = (domain, parentDom) ->
 		deserializeFocus focus, focusesDom
 
 	domainDom.find('.addFocus').click (event) ->
+		event.preventDefault()
+
 		focusesDom = $(event.target).parents('.domain').find('.focuses')
 		deserializeFocus DEFAULT_FOCUS, focusesDom
 		focusesDom.children().last().find('textarea').first().focus()
@@ -100,53 +111,68 @@ deserializeFocus = (focus, parentDom) ->
 
 	[mostRecentRev, pastRevs...] = focus.revisions
 
-	focusDom.children('.mostRecentRevision').html templates.formPageFocusRev mostRecentRev
+	deserializeFocusRevision mostRecentRev, focusDom.children('.mostRecentRevision')
 
 	for rev in pastRevs
 		deserializeFocusRevision rev, focusDom.children('.pastRevisions')
 
 deserializeFocusRevision = (focusRev, parentDom) ->
 	parentDom.append templates.formPageFocusRev focusRev
+	revDom = parentDom.children().last()
 
-showFormPage = (filePath) ->
-	carePlan = {
-		patient: {
-			name: "Amy Pond"
-			jNumber: "J 10998123"
-		}
-		domains: ({name, focuses: []} for name in DEFAULT_DOMAIN_NAMES)
-	}
-	carePlan.domains[0].focuses = [
-		{
-			revisions: [
-				timestamp: ''
-				description: 'Major Depressive Disorder\nLikely OCD\nSocial Anxiety'
-				solution: 'Health teaching re: depression and coping strategies for depression and anxiety given and printed material provided.\nExposure is the best treatment and avoidance makes things worse'
-				initials: ''
-			]
-		}
-		{
-			revisions: [
-				timestamp: ''
-				description: 'Suicidal ideation with plan'
-				solution: 'Review "Dealing with Distress booklet" to identify alternative strategies to cope with chronic suicidal thoughts.\nComposed a Safety Plan, agrees to review regularly and utilize steps outlined should you fall into crisis.  Suicidal intention and planning has completely resolved at the time of discharge'
-				initials: ''
-			]
-		}
-	]
-	carePlan.domains[2].focuses = [
-		{
-			revisions: [
-				timestamp: ''
-				description: 'Current medication'
-				solution: 'clomipramine 100 mg at bedtime\nLoxapine 10 mg at bedtime.\nativan 2 mg at bedtime (recommend minimize use; taper and discontinue)'
-				initials: ''
-			]
-		}
-	]
+	console.log revDom
+	revDom.find('textarea').blur (event) ->
+		# Remove the focus item if fields are blank and no past revisions
+		allEmpty = true
+		for textarea in revDom.find('textarea')
+			if $(textarea).val()
+				allEmpty = false
+				break
 
-	deserializeCarePlan carePlan, $('.page')
+		if allEmpty
+			focusDom = revDom.parents('.focus')
+
+			if focusDom.find('.pastRevisions').children().length is 0
+				focusDom.remove()
+
+showNewPatientPage = ->
+	$('.page').remove()
+	$('body').append templates.newPatientPage()
+
+	$('.page > button.create').click (event) ->
+		firstName = $('.page .firstName.field').val()
+		lastName = $('.page .lastName.field').val()
+		jNumber = $('.page .jNumber.field').val()
+
+		# Show save as dialog
+		fileNameSuggestion = "#{lastName}_#{firstName}.careplan"
+		dialogDom = $('input.dialog')
+		dialogDom.attr 'nwsaveas', fileNameSuggestion
+
+		dialogDom.change (event) ->
+			NProgress.start()
+			path = this.value
+
+			fs.exists path, (exists) ->
+				NProgress.done()
+
+				if exists
+					alert 'File already exists!  Either delete the existing file, or choose a new location.'
+					return
+
+				carePlan = {
+					patient: {firstName, lastName, jNumber}
+					domains: ({name, focuses: []} for name in DEFAULT_DOMAIN_NAMES)
+				}
+				showFormPage carePlan, path
+
+		dialogDom.click()
+
+showFormPage = (carePlan, filePath) ->
+	$('.page').remove()
+	deserializeCarePlan carePlan, $('body')
 
 $ ->
 	compileTemplates()
-	showFormPage('somewhere')
+	showNewPatientPage()
+	#showFormPage('somewhere')

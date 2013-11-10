@@ -2,7 +2,7 @@
   "name": "testapp",
   "main": "main.html",
   "window": {
-    "toolbar": false
+  	"toolbar": true
   },
   "devDependencies": {
     "grunt-contrib-clean": "~0.5.0",
